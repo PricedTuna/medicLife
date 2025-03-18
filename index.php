@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Life Medic</title>
-    <link rel="stylesheet" href="login/login.styles.css">
-    <script src="login/login.app.js" defer></script>
+    <link rel="stylesheet" href="login.styles.css">
+    <script src="login.app.js" defer></script>
 </head>
 <body>
     <div class="login-container">
-        <h2>Iniciar sesión</h2> <!-- Utilizo h2 porque no es como tal el título principal de la página, es más una sección y h2 se utiliza para secciones.-->
-        <form id="loginForm" action="#" method="POST"> <!-- Utilizo el # en action porque aún no se define la URL del servidor a donde se enviarán los datos, se desconoce. Se define el método para especificar cómo se enviarán los datos al servidor.-->
+        <h2>Iniciar sesión</h2>
+        <?php
+        if (isset($_GET['error'])) {
+            echo "<p style='color:red;'>Credenciales incorrectas</p>";
+        }
+        ?>
+        <form id="loginForm" action="../controllers/loginController.php" method="POST">
             <div class="form-group">
                 <label for="email">Correo electrónico</label>
-                <input type="email" id="email" name="email" placeholder="Correo electrónico" required> <!--Checar name y id y type email-->
+                <input type="email" id="email" name="email" placeholder="Correo electrónico" required>
             </div>
             <div class="form-group">
                 <label for="password">Contraseña</label>
                 <input type="password" id="password" name="password" placeholder="Contraseña" required>
             </div>
-
             <button type="submit" name="login">Ingresar</button>
         </form>   
     </div>
