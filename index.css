@@ -33,6 +33,7 @@ body {
   background-color: var(--color-fondo);
   display: flex;
   min-height: 100vh;
+  height: fit-content;
 }
 
 h1, h2, h3 {

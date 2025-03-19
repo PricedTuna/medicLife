@@ -17,14 +17,12 @@ body {
     font-family: 'Poppins', sans-serif; /* Fuente principal y secundaria */
     background-color: var(--base-clr);
     color: var(--text-clr);
-    border-top: 70px solid var(--accent-clr); /* Línea superior */
-    border-bottom: 150px solid var(--accent-clr); /* Línea inferior */
 }
 
 .login-container {
     width: 100%; /* Ocupa todo el ancho disponible de su contenedor padre */
     max-width: 400px; /* Ancho máximo del contenedor */
-    margin: 100px auto; /* Margen de 100 pixeles en la parte superior e inferior y centra horizontalmente automáticamente */
+    margin: auto;
     padding: 20px; /* Espacio interno de 20 pixeles dentro del contenedor */
     background-color: var(--hover-clr); /* Fondo blanco del contenedor para contraste */
     border-radius: 10px; /* Bordes redondeados en el recuadro */

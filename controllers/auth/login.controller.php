@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (validarUsuario($email, $password)) {
         $_SESSION['usuario'] = $email;
-        header('Location: ../../views/home.php');
+        header('Location: ../../views/dashboard/dashboard.php');
         exit();
     } else {
         header('Location: ../../index.php?error=1');
