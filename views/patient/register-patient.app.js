@@ -65,6 +65,23 @@ function validateStep(step) {
 document.getElementById('curp').addEventListener('input', function() {
     this.value = this.value.toUpperCase();
 });
+document.addEventListener("DOMContentLoaded", function() {
+    let sidebar = document.getElementById("sidebar");
+    let currentPage = window.location.pathname.split("/").pop();
+
+    let formPages = ["registro_paciente.html"]; // Agrega aquí los nombres de las páginas donde quieres ocultarlo
+
+    if (formPages.includes(currentPage)) {
+        sidebar.classList.add("hidden-sidebar");
+    }
+});
+
+// Función para alternar manualmente el sidebar
+function toggleSidebar() {
+    let sidebar = document.getElementById("sidebar");
+    sidebar.classList.toggle("hidden-sidebar");
+}
+
 
 document.addEventListener('DOMContentLoaded', () => {
     showStep(currentStep);

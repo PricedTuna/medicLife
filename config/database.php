@@ -2,7 +2,7 @@
 // config/database.php
 
 $host     = "localhost";
-$dbname   = "nombre_de_tu_bd"; // Cambia por el nombre real de tu base de datos
+$dbname   = "medic_life"; // Cambia por el nombre real de tu base de datos
 $username = "root";            // En XAMPP suele ser 'root'
 $password = "";                // Normalmente vacío
 

@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./register-patient.styles.css">
+    <link rel="stylesheet" href="../components/sidebar.styles.css">
+    <script src="../components/sidebar.app.js" defer></script>
+
     <script src="./register-patient.app.js" defer></script>
     <title>Registro de Paciente</title>
 </head>
 <body>
-    <main>
+
     <div class="center-container">
+    <?php include '../components/sidebar.php'; ?> <!-- Incluye el sidebar -->
         <div class="form-container">
             <h2>Registro de Paciente</h2>
 
@@ -183,6 +187,5 @@
 
         </div>
     </div>
-    </main>
 </body>
 </html>
