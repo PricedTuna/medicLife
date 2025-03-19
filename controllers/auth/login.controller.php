@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../models/user.php';
+include '../../models/user.model.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
@@ -8,13 +8,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (validarUsuario($email, $password)) {
         $_SESSION['usuario'] = $email;
-        header('Location: ../public/home.php');
+        header('Location: ../../views/home.php');
         exit();
     } else {
-        header('Location: ../public/index.php?error=1');
+        header('Location: ../../index.php?error=1');
         exit();
     }
 } else {
-    header('Location: ../public/index.php');
+    header('Location: ../../index.php');
     exit();
 }

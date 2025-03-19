@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Life Medic</title>
-    <link rel="stylesheet" href="login.styles.css">
-    <script src="login.app.js" defer></script>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="login/login.styles.css">
 </head>
 <body>
     <div class="login-container">
@@ -15,7 +15,7 @@
             echo "<p style='color:red;'>Credenciales incorrectas</p>";
         }
         ?>
-        <form id="loginForm" action="../controllers/loginController.php" method="POST">
+        <form id="loginForm" action="./controllers/auth/login.controller.php" method="POST">
             <div class="form-group">
                 <label for="email">Correo electrónico</label>
                 <input type="email" id="email" name="email" placeholder="Correo electrónico" required>
