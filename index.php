@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="login-container">
-        <?php include("views/login/login.php") ?>
+        <?php include("views/login/login.view.php") ?>
         <div class="login-footer">
             <p>© 2025 Life Medic. Todos los derechos reservados.</p>
         </div>
