@@ -3,13 +3,17 @@ require '../../../config/database.config.php';
 
 try {
     $stmt = $pdo->query("SELECT id_state, id, name FROM municipalities");
-    $municipalities = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    $stmt->execute();
+    $municipalities = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-    $stmt = $pdo->query("SELECT id, name FROM states");
-    $states = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    $stmt = $pdo->query("SELECT * FROM states");
+    $stmt->execute();
+    $states = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     $stmt = $pdo->query("SELECT id_state, id_municipality, id, name FROM localities");
-    $localities = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    $stmt->execute();
+    $localities = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 } catch (PDOException $e) {
     die("Error al obtener tablas: " . $e->getMessage());
 }
@@ -36,8 +40,13 @@ try {
             </div>
 
             <h2>Registro de Doctores</h2>
+            <?php if (isset($_GET['error'])): ?>
+            <div style="color: red; margin-bottom: 1rem; border: 1px solid red; padding: 0.5rem; border-radius: 5px;">
+                <?php echo htmlspecialchars($_GET['error']); ?>
+            </div>
+            <?php endif; ?>
 
-            <form id="doctor-form">
+            <form action="../../../controllers/doctor/register-doctor.controller.php" method="POST" id="doctor-form" enctype="multipart/form-data">
                 <!-- Paso 1 -->
                 <div class="form-step" id="step-1">
                     <div class="form-group">
@@ -64,8 +73,8 @@ try {
                         <label for="gender">Sexo</label>
                         <select id="gender" name="gender" required>
                             <option value="">Seleccione...</option>
-                            <option value="Masculino">Masculino</option>
-                            <option value="Femenino">Femenino</option>
+                            <option value="M">Masculino</option>
+                            <option value="F">Femenino</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -99,32 +108,26 @@ try {
                     </div>
                     <div class="form-group">
                         <label for="state">Estado</label>
-                        <select name="state" id="state">
+                        <select name="state" id="state" required>
                             <option value="">Seleccione...</option>
                             <?php foreach ($states as $state): ?>
-                                <option value="<?php echo state.id ?>"><?php echo state.name ?></option>
+                                <option value="<?php echo $state['id']; ?>"><?php echo $state['name']; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="municipality">Municipio</label>
-                        <select name="municipality" id="municipality">
-                            <option value="">Seleccione...</option>
-                            <?php foreach ($municipalities as $municipy): ?>
-                                <option value="<?php echo municipy.id_state+municipy.id ?>"><?php echo municipy.name ?></option>
-                            <?php endforeach; ?>
+                        <select name="municipality" id="municipality" required>
+                            <option value="">Seleccione un estado primero...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="locality">Localidad</label>
+                        <select name="locality" id="locality" required>
+                            <option value="">Seleccione un municipio primero...</option>
                         </select>
                     </div>
 
-                    <div class="form-group">
-                        <label for="locality">Localidad</label>
-                        <select name="locality" id="locality">
-                            <option value="">Seleccione...</option>
-                            <?php foreach ($localities as $locality): ?>
-                                <option value="<?php echo locality.id_state+locality.id_municipality+locality.id ?>"><?php echo locality.name ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
                     <button type="button" class="prev-btn" onclick="prevStep(1)">Atrás</button>
                     <button type="button" class="next-btn" onclick="nextStep(3)">Siguiente</button>
                 </div>
@@ -167,3 +170,43 @@ try {
 </body>
 
 </html>
+
+<script>
+    const municipalities = <?php echo json_encode($municipalities); ?>;
+    const localities = <?php echo json_encode($localities); ?>;
+
+    const stateSelect = document.getElementById('state');
+    const municipalitySelect = document.getElementById('municipality');
+    const localitySelect = document.getElementById('locality');
+
+    stateSelect.addEventListener('change', () => {
+    const selectedState = stateSelect.value;
+
+    municipalitySelect.innerHTML = '<option value="">Seleccione...</option>';
+    localitySelect.innerHTML = '<option value="">Seleccione un municipio primero...</option>';
+
+    if (selectedState) {
+        const filteredMunicipalities = municipalities.filter(m => m.id_state == selectedState);
+        filteredMunicipalities.forEach(m => {
+        municipalitySelect.innerHTML += `<option value="${m.id}">${m.name}</option>`;
+        });
+    }
+    });
+
+    municipalitySelect.addEventListener('change', () => {
+    const selectedState = stateSelect.value;
+    const selectedMunicipality = municipalitySelect.value;
+
+    localitySelect.innerHTML = '<option value="">Seleccione...</option>';
+
+    if (selectedMunicipality) {
+        const filteredLocalities = localities.filter(l =>
+        l.id_state == selectedState && l.id_municipality == selectedMunicipality
+        );
+        filteredLocalities.forEach(l => {
+        localitySelect.innerHTML += `<option value="${l.id}">${l.name}</option>`;
+        });
+    }
+    });
+
+</script>

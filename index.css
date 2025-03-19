@@ -1,10 +1,10 @@
 @import url('resset.css');
 
-@import url('./login/login.styles.css');
-@import url('./dashboard/dashboard.styles.css');
-@import url('./doctor/doctor.styles.css');
-@import url('./patient/patient.styles.css');
-@import url('./solicitar-cita/solicitar-cita.styles.css');
+@import url('./views/login/login.styles.css');
+@import url('./views/dashboard/dashboard.styles.css');
+@import url('./views/doctor/doctor.styles.css');
+@import url('./views/patient/patient.styles.css');
+@import url('./views/solicitar-cita/solicitar-cita.styles.css');
 
 /* Estilo base */
 
