@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./register-patient.styles.css">
-    <link rel="stylesheet" href="../components/sidebar.styles.css">
-    <script src="../components/sidebar.app.js" defer></script>
+    <link rel="stylesheet" href="../../components/sidebar.styles.css">
+    <script src="../../components/sidebar.app.js" defer></script>
 
     <script src="./register-patient.app.js" defer></script>
     <title>Registro de Paciente</title>
@@ -13,7 +13,7 @@
 <body>
 
     <div class="center-container">
-    <?php include '../components/sidebar.php'; ?> <!-- Incluye el sidebar -->
+    <?php include '../../components/sidebar.php'; ?> <!-- Incluye el sidebar -->
         <div class="form-container">
             <h2>Registro de Paciente</h2>
 
@@ -29,27 +29,27 @@
     <div class="form-step" id="step-1">
         <div class="form-group">
             <label for="lastName">Apellido Paterno</label>
-            <input type="text" id="lastName" required>
+            <input type="text" id="lastName" name="last_name" required>
         </div>
         <div class="form-group">
             <label for="motherLastName">Apellido Materno</label>
-            <input type="text" id="motherLastName" required>
+            <input type="text" id="motherLastName" name="last_name2"required>
         </div>
         <div class="form-group">
             <label for="firstName">Nombre</label>
-            <input type="text" id="firstName" required>
+            <input type="text" id="firstName" name="names" required>
         </div>
         <div class="form-group">
             <label for="phoneNumber">Número Telefónico</label>
-            <input type="number" id="phoneNumber" required>
+            <input type="number" id="phoneNumber" name="phone" required>
         </div>
         <div class="form-group">
             <label for="email">Correo Electrónico</label>
-            <input type="email" id="email" required>
+            <input type="email" id="email" name="email" required>
         </div>
         <div class="form-group">
             <label for="gender">Sexo</label>
-            <select id="gender" required>
+            <select id="gender" name="gender" required>
                 <option value="">Seleccione...</option>
                 <option value="Masculino">Masculino</option>
                 <option value="Femenino">Femenino</option>
@@ -57,19 +57,19 @@
         </div>
         <div class="form-group">
             <label for="birthDate">Fecha de Nacimiento</label>
-            <input type="date" id="birthDate" required>
+            <input type="date" id="birthDate" name="birth_date" required>
         </div>
         <div class="form-group">
             <label for="curp">CURP</label>
-            <input type="text" id="curp" required >
+            <input type="text" id="curp" name="CURP" required >
         </div>
         <div class="form-group">
             <label for="rfc">RFC</label>
-            <input type="text" id="rfc" required>
+            <input type="text" id="rfc" name="RFC"required>
         </div>
         <div class="form-group">
             <label for="affiliationNumber">Número de Afiliación</label>
-            <input type="text" id="affiliationNumber" required>
+            <input type="text" id="affiliationNumber" name="insurance_number" required>
         </div>
         <button type="button" class="next-btn" onclick="nextStep(2)">Siguiente</button>
     </div>
@@ -78,23 +78,23 @@
     <div class="form-step" id="step-2" style="display: none;">
         <div class="form-group">
             <label for="street">Calle</label>
-            <input type="text" id="street" required>
+            <input type="text" id="street" name="street" required>
         </div>
         <div class="form-group">
             <label for="neighborhood">Colonia</label>
-            <input type="text" id="neighborhood" required>
+            <input type="text" id="neighborhood" name="neighborhood" required>
         </div>
         <div class="form-group">
             <label for="postalCode">Código Postal</label>
-            <input type="number" id="postalCode" required>
+            <input type="number" id="postalCode" name="CP" required>
         </div>
         <div class="form-group">
             <label for="extNumber">Número Exterior</label>
-            <input type="text" id="extNumber" required>
+            <input type="text" id="extNumber" name="external_number"required>
         </div>
         <div class="form-group">
             <label for="country">País</label>
-            <input type="text" id="country" required>
+            <input type="text" id="country" name="" required>
         </div>
         <div class="form-group">
             <label for="state">Estado</label>

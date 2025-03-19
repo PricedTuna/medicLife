@@ -45,6 +45,7 @@ try {
                 <?php echo htmlspecialchars($_GET['error']); ?>
             </div>
             <?php endif; ?>
+            
 
             <form action="../../../controllers/doctor/register-doctor.controller.php" method="POST" id="doctor-form" enctype="multipart/form-data">
                 <!-- Paso 1 -->
