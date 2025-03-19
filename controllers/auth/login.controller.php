@@ -6,9 +6,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    if (validarUsuario($email, $password)) {
+    if (validateUser($email, $password)) {
         $_SESSION['usuario'] = $email;
-        header('Location: ../../views/dashboard/dashboard.php');
+        header('Location: ../../views/dashboard/dashboard.view.php');
         exit();
     } else {
         header('Location: ../../index.php?error=1');

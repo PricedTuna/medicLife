@@ -4,7 +4,7 @@
 $host     = "localhost";
 $dbname   = "medic_life"; // Cambia por el nombre real de tu base de datos
 $username = "root";            // En XAMPP suele ser 'root'
-$password = "";                // Normalmente vacío
+$password = "root";                // Normalmente vacío
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
