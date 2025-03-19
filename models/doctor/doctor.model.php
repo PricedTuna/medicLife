@@ -1,5 +1,5 @@
 <?php
-function validateUser($email, $password) {
+function createDoctor($email, $password) {
     // Esto es solo un ejemplo hardcodeado:
     $usuarios = [
         'admin@lifemedic.com' => '1234',
