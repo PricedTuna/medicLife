@@ -1,3 +1,20 @@
+<?php
+require '../../../config/database.config.php';
+
+try {
+    $stmt = $pdo->query("SELECT id_state, id, name FROM municipalities");
+    $municipalities = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    
+    $stmt = $pdo->query("SELECT id, name FROM states");
+    $states = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+    $stmt = $pdo->query("SELECT id_state, id_municipality, id, name FROM localities");
+    $localities = $stmt->fetchAll(PDO::FETCH_COLUMN);
+} catch (PDOException $e) {
+    die("Error al obtener tablas: " . $e->getMessage());
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -59,7 +76,7 @@
                 </div>
 
                 <!-- Paso 2 -->
-                <div class="form-step" id="step- name="step-2" style="display: none;">
+                <div class="form-step" id="step-2" style="display: none;">
                     <div class="form-group">
                         <label for="street">Calle</label>
                         <input type="text" id="street" name="street" required>
@@ -82,11 +99,31 @@
                     </div>
                     <div class="form-group">
                         <label for="state">Estado</label>
-                        <input type="text" id="state" name="state" required>
+                        <select name="state" id="state">
+                            <option value="">Seleccione...</option>
+                            <?php foreach ($states as $state): ?>
+                                <option value="<?php echo state.id ?>"><?php echo state.name ?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="municipality">Municipio</label>
-                        <input type="text" id="municipality" name="municipality" required>
+                        <select name="municipality" id="municipality">
+                            <option value="">Seleccione...</option>
+                            <?php foreach ($municipalities as $municipy): ?>
+                                <option value="<?php echo municipy.id_state+municipy.id ?>"><?php echo municipy.name ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="locality">Localidad</label>
+                        <select name="locality" id="locality">
+                            <option value="">Seleccione...</option>
+                            <?php foreach ($localities as $locality): ?>
+                                <option value="<?php echo locality.id_state+locality.id_municipality+locality.id ?>"><?php echo locality.name ?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
                     <button type="button" class="prev-btn" onclick="prevStep(1)">Atrás</button>
                     <button type="button" class="next-btn" onclick="nextStep(3)">Siguiente</button>
@@ -94,7 +131,7 @@
 
 
                 <!-- Paso 3 -->
-                <div class="form-step" id="step- name="step-3" style="display: none;">
+                <div class="form-step" id="step-3" style="display: none;">
                     <div class="form-group">
                         <label for="curp">CURP</label>
                         <input type="text" id="curp" name="curp" required>
