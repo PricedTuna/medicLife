@@ -17,9 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $names = $_POST['names'];
         $last_name = $_POST['last_name'];
         $last_name2 = $_POST['last_name2'];
-        $id_state = $_POST['id_state'];
-        $id_municipality = $_POST['id_municipality'];
-        $id_locality = $_POST['id_locality'];
+        $id_state = $_POST['state'];
+        $id_municipality = $_POST['municipality'];
+        $id_locality = $_POST['locality'];
         $CP = $_POST['CP'];
         $street = $_POST['street'];
         $external_number = $_POST['external_number'];
@@ -33,19 +33,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email = $_POST['email'];
         $gender = $_POST['gender'];
         $weight = $_POST['weight'];
-        // $height = $_POST['height'];
-        $height = '70';
+        $height = $_POST['height'];
         $blood_type = $_POST['blood_type'];
-        // $marital_status = $_POST['marital_status'];
-        $marital_status = 'Soltero(a)';
+        $marital_status = $_POST['marital_status'];
         $ethnic_group = $_POST['ethnic_group'];
-        // $religion = $_POST['religion'];
-        $religion = 'alguno';
-
-        // !
-        $CURP = '123456789123456789';
-        $RFC = '1232456789123';
-        $gender = 'M';
+        $religion = $_POST['religion'];
 
         validarLongitud('names', $names, 40);
 
