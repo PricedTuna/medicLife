@@ -39,6 +39,12 @@ try {
         <div class="form-container">
             <h2>Registro de Paciente</h2>
 
+            <?php if (isset($_GET['error'])): ?>
+                <div style="color: red; margin-bottom: 1rem; border: 1px solid red; padding: 0.5rem; border-radius: 5px;">
+                    <?php echo htmlspecialchars($_GET['error']); ?>
+                </div>
+            <?php endif; ?>
+            
             <div class="steps">
                 <div class="step step-active">Paso 1</div>
                 <div class="step">Paso 2</div>

@@ -19,6 +19,11 @@
         <div class="main-content">
             <header>
                 <h1>Dashboard</h1>
+                <?php if (isset($_GET['success'])): ?>
+                    <div style="color: green; margin-bottom: 1rem; border: 1px solid red; padding: 0.5rem; border-radius: 5px;">
+                        <?php echo htmlspecialchars($_GET['error']); ?>
+                    </div>
+                <?php endif; ?>
                 <div class="search-container">
                     <input type="text" placeholder="Search type of keywords">
                 </div>

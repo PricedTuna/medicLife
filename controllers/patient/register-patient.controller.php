@@ -6,7 +6,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require '../../config/database.config.php';
 
     // Función para validar longitud
-    function validarLongitud($campo, $valor, $max) {
+    function validarLongitud($campo, $valor, $max)
+    {
         if (strlen($valor) > $max) {
             throw new Exception("El campo $campo excede la longitud máxima de $max caracteres.");
         }
@@ -39,34 +40,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $ethnic_group = $_POST['ethnic_group'];
         $religion = $_POST['religion'];
 
-        validarLongitud('names', $names, 40);
+        try {
+            validarLongitud('names', $names, 40);
 
-        validarLongitud('last_name', $last_name, 40);
+            validarLongitud('last_name', $last_name, 40);
 
-        validarLongitud('last_name2', $last_name2, 40);
+            validarLongitud('last_name2', $last_name2, 40);
 
-        if (strlen($CP) !== 5) throw new Exception("El código postal debe ser de 5 caracteres.");
+            if (strlen($CP) !== 5) throw new Exception("El código postal debe ser de 5 caracteres.");
 
-        validarLongitud('street', $street, 50);
+            validarLongitud('street', $street, 50);
 
-        validarLongitud('external_number', $external_number, 8);
+            validarLongitud('external_number', $external_number, 8);
 
-        validarLongitud('internal_number', $internal_number, 8);
+            validarLongitud('internal_number', $internal_number, 8);
 
-        validarLongitud('neighborhood', $neighborhood, 50);
+            validarLongitud('neighborhood', $neighborhood, 50);
 
-        validarLongitud('insurance_number', $insurance_number, 20);
+            validarLongitud('insurance_number', $insurance_number, 20);
 
-        if ($CURP && strlen($CURP) !== 18) throw new Exception("La CURP debe tener 18 caracteres.");
+            if ($CURP && strlen($CURP) !== 18) throw new Exception("La CURP debe tener 18 caracteres.");
 
-        if ($RFC && strlen($RFC) !== 13) throw new Exception("El RFC debe tener 13 caracteres.");
+            if ($RFC && strlen($RFC) !== 13) throw new Exception("El RFC debe tener 13 caracteres.");
 
-        if (strlen($phone) !== 10) throw new Exception("El teléfono debe tener 10 dígitos.");
+            if (strlen($phone) !== 10) throw new Exception("El teléfono debe tener 10 dígitos.");
 
-        validarLongitud('email', $email, 50);
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) throw new Exception("El correo electrónico no es válido.");
+            validarLongitud('email', $email, 50);
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) throw new Exception("El correo electrónico no es válido.");
 
-        if (strlen($gender) > 2) throw new Exception("El género debe ser máximo de 2 caracteres.");
+            if (strlen($gender) > 2) throw new Exception("El género debe ser máximo de 2 caracteres.");
+        } catch (Exception $e) {
+            header('Location: ../../views/doctor/register/register-patient.view.php?error=' . urlencode($e->getMessage()));
+            exit;
+        }
 
         $status = 'A'; // Puedes establecer un status por defecto
 
@@ -76,38 +82,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             :names, :last_name, :last_name2, :id_state, :id_municipality, :id_locality, :CP, :street, :external_number, :internal_number, :neighborhood, :insurance_number, :birth_date, :CURP, :RFC, :phone, :email, :gender, :weight, :height, :blood_type, :marital_status, :ethnic_group, :religion, :status
         )");
 
-        $stmt->execute([
-            ':names' => $names,
-            ':last_name' => $last_name,
-            ':last_name2' => $last_name2,
-            ':id_state' => $id_state,
-            ':id_municipality' => $id_municipality,
-            ':id_locality' => $id_locality,
-            ':CP' => $CP,
-            ':street' => $street,
-            ':external_number' => $external_number,
-            ':internal_number' => $internal_number,
-            ':neighborhood' => $neighborhood,
-            ':insurance_number' => $insurance_number,
-            ':birth_date' => $birth_date,
-            ':CURP' => $CURP,
-            ':RFC' => $RFC,
-            ':phone' => $phone,
-            ':email' => $email,
-            ':gender' => $gender,
-            ':weight' => $weight,
-            ':height' => $height,
-            ':blood_type' => $blood_type,
-            ':marital_status' => $marital_status,
-            ':ethnic_group' => $ethnic_group,
-            ':religion' => $religion,
-            ':status' => $status,
-        ]);
+        try {
+            $stmt->execute([
+                ':names' => $names,
+                ':last_name' => $last_name,
+                ':last_name2' => $last_name2,
+                ':id_state' => $id_state,
+                ':id_municipality' => $id_municipality,
+                ':id_locality' => $id_locality,
+                ':CP' => $CP,
+                ':street' => $street,
+                ':external_number' => $external_number,
+                ':internal_number' => $internal_number,
+                ':neighborhood' => $neighborhood,
+                ':insurance_number' => $insurance_number,
+                ':birth_date' => $birth_date,
+                ':CURP' => $CURP,
+                ':RFC' => $RFC,
+                ':phone' => $phone,
+                ':email' => $email,
+                ':gender' => $gender,
+                ':weight' => $weight,
+                ':height' => $height,
+                ':blood_type' => $blood_type,
+                ':marital_status' => $marital_status,
+                ':ethnic_group' => $ethnic_group,
+                ':religion' => $religion,
+                ':status' => $status,
+            ]);
 
-        echo "Paciente insertado correctamente.";
-    } catch (Exception $e) {
-        echo "Error: " . $e->getMessage();
+            echo "Paciente insertado correctamente.";
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        } catch (PDOException $e) {
+            echo "Error en la base de datos: " . $e->getMessage();
+        }
+
+        header('Location: ../../views/dashboard/dashboard.view.php?success=' . urlencode("doctor creado"));
     } catch (PDOException $e) {
-        echo "Error en la base de datos: " . $e->getMessage();
+        echo "Error al insertar: " . $e->getMessage();
     }
 }
