@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="./register-patient.styles.css">
     <link rel="stylesheet" href="../../components/sidebar.styles.css">
     <script src="../../components/sidebar.app.js" defer></script>
+    <script src="register-patient.app.js" defer></script>
 
-    <script src="./register-patient.app.js" defer></script>
     <title>Registro de Paciente</title>
 </head>
 <body>
@@ -24,7 +24,7 @@
                 <div class="step">Paso 4</div>
             </div>
 
-            <form id="patient-form">
+            <form id="patient-form" action="../../../controllers/patient/register-patient.controller.php" method="POST">
     <!-- Paso 1: Datos Personales -->
     <div class="form-step" id="step-1">
         <div class="form-group">
@@ -51,8 +51,8 @@
             <label for="gender">Sexo</label>
             <select id="gender" name="gender" required>
                 <option value="">Seleccione...</option>
-                <option value="Masculino">Masculino</option>
-                <option value="Femenino">Femenino</option>
+                <option value="M">Masculino</option>
+                <option value="F">Femenino</option>
             </select>
         </div>
         <div class="form-group">
@@ -93,20 +93,20 @@
             <input type="text" id="extNumber" name="external_number"required>
         </div>
         <div class="form-group">
-            <label for="country">País</label>
-            <input type="text" id="country" name="" required>
+            <label for="extNumber">Número Interior</label>
+            <input type="text" id="extNumber" name="internal_number"required>
         </div>
         <div class="form-group">
             <label for="state">Estado</label>
-            <input type="text" id="state" required>
+            <input type="text" id="state" name="id_state" required>
         </div>
         <div class="form-group">
             <label for="municipality">Municipio</label>
-            <input type="text" id="municipality" required>
+            <input type="text" id="municipality" name="id_municipality" required>
         </div>
         <div class="form-group">
             <label for="locality">Localidad</label>
-            <input type="text" id="locality" required>
+            <input type="text" id="locality" name="id_locality" required>
         </div>
         <button type="button" class="prev-btn" onclick="prevStep(1)">Atrás</button>
         <button type="button" class="next-btn" onclick="nextStep(3)">Siguiente</button>
@@ -116,7 +116,7 @@
     <div class="form-step" id="step-3" style="display: none;">
         <div class="form-group">
             <label for="bloodType">Tipo de Sangre</label>
-            <select id="bloodType" required>
+            <select id="bloodType" name="blood_type" required>
                 <option value="">Seleccione...</option>
                 <option value="A+">A+</option>
                 <option value="A-">A-</option>
@@ -130,29 +130,29 @@
         </div>
         <div class="form-group">
             <label for="maritalStatus">Estado Civil</label>
-            <select id="maritalStatus" required>
+            <select id="maritalStatus" name="marital_status" required>
                 <option value="">Seleccione...</option>
-                <option value="Soltero/a">Soltero/a</option>
-                <option value="Casado/a">Casado/a</option>
-                <option value="Divorciado/a">Divorciado/a</option>
-                <option value="Viudo/a">Viudo/a</option>
+                <option value="Soltero(a)">Soltero/a</option>
+                <option value="Casado(a)">Casado/a</option>
+                <option value="Viudo(a)">Viudo/a</option>
+                <option value="Unión libre">Unión libre</option>
             </select>
         </div>
         <div class="form-group">
             <label for="weight">Peso (kg)</label>
-            <input type="number" id="weight" required>
+            <input type="number" id="weight" name="weight" required>
         </div>
         <div class="form-group">
             <label for="height">Altura (cm)</label>
-            <input type="number" id="height" required>
+            <input type="number" id="height" name="height" required>
         </div>
         <div class="form-group">
             <label for="ethnicGroup">Grupo Étnico</label>
-            <input type="text" id="ethnicGroup">
+            <input type="text" id="ethnicGroup" name="ethnic_group" >
         </div>
         <div class="form-group">
             <label for="religion">Religión</label>
-            <input type="text" id="religion">
+            <input type="text" id="religion" name="religion">
         </div>
         <button type="button" class="prev-btn" onclick="prevStep(2)">Atrás</button>
         <button type="button" class="next-btn" onclick="nextStep(4)">Siguiente</button>

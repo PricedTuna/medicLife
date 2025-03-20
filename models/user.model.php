@@ -1,5 +1,5 @@
 <?php
-require_once '../../config/database.php';
+require_once '../../config/database.config.php';
 
 function validateUser($email, $password) {
     global $pdo;

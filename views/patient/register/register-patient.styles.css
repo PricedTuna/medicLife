@@ -24,7 +24,7 @@ body {
     font-family: 'Poppins', sans-serif;
     background-color: var(--base-clr);
     color: var(--text-clr);
-    display: grid;
+    display: flex;
     grid-template-columns: auto 1fr;
     min-height: 100vh;
     min-height: 100dvh;

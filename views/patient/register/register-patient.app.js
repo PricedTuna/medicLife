@@ -21,15 +21,15 @@ function showStep(step) {
 
     console.log(`Mostrando paso: ${step}`); // Debugging
 }
-const toggleButton = document.getElementById('toggle-btn')
-const sidebar = document.getElementById('sidebar')
+// const toggleButton = document.getElementById('toggle-btn')
+// const sidebar = document.getElementById('sidebar')
 
-function toggleSidebar() {
-    sidebar.classList.toggle('close')
-    toggleButton.classList.toggle('rotate')
+// function toggleSidebar() {
+//     sidebar.classList.toggle('close')
+//     sidebarToggleButton.classList.toggle('rotate')
 
-    closeAllSubMenus()
-}
+//     closeAllSubMenus()
+// }
 
 
 function nextStep(step) {
