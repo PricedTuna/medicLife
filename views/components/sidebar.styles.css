@@ -26,6 +26,7 @@ html {
     border-right: 1px solid var(--line-clr);
     position: sticky;
     top: 0;
+    left: 0;
     align-self: start;
     transition: 300ms ease-in-out;
     overflow: hidden;
@@ -95,6 +96,11 @@ html {
 
 #toggle-btn:hover {
     background-color: var(--hover-clr);
+}
+
+#sidebar span {
+    font-size: 16px;
+    margin: 0%;
 }
 
 @media(max-width: 800px) {

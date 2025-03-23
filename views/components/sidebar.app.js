@@ -1,7 +1,10 @@
+console.log("LOADED!!")
+
 const sidebarToggleButton = document.getElementById('toggle-btn')
 const sidebar = document.getElementById('sidebar')
 
 function toggleSidebar() {
+    console.log("pressed")
     sidebar.classList.toggle('close')
     sidebarToggleButton.classList.toggle('rotate')
 }

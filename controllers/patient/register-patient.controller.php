@@ -1,10 +1,8 @@
 <?php
+// Conexión a la base de datos (asegúrate de tener $pdo configurado)
+require $_SERVER['DOCUMENT_ROOT'] . '/medicLife/config/database.config.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    // Conexión a la base de datos (asegúrate de tener $pdo configurado)
-    require '../../config/database.config.php';
-
     // Función para validar longitud
     function validarLongitud($campo, $valor, $max)
     {
@@ -14,7 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     try {
-
         $names = $_POST['names'];
         $last_name = $_POST['last_name'];
         $last_name2 = $_POST['last_name2'];
@@ -70,19 +67,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if (strlen($gender) > 2) throw new Exception("El género debe ser máximo de 2 caracteres.");
         } catch (Exception $e) {
-            header('Location: ../../views/doctor/register/register-patient.view.php?error=' . urlencode($e->getMessage()));
+            header("Location: /views/patient/register/register-patient.view.php?error=" . urlencode($e->getMessage()));
             exit;
         }
 
         $status = 'A'; // Puedes establecer un status por defecto
 
-        $stmt = $pdo->prepare("INSERT INTO patients (
-            names, last_name, last_name2, id_state, id_municipality, id_locality, CP, street, external_number, internal_number, neighborhood, insurance_number, birth_date, CURP, RFC, phone, email, gender, weight, height, blood_type, marital_status, ethnic_group, religion, status
-        ) VALUES (
-            :names, :last_name, :last_name2, :id_state, :id_municipality, :id_locality, :CP, :street, :external_number, :internal_number, :neighborhood, :insurance_number, :birth_date, :CURP, :RFC, :phone, :email, :gender, :weight, :height, :blood_type, :marital_status, :ethnic_group, :religion, :status
-        )");
-
         try {
+            $stmt = $pdo->prepare("INSERT INTO patients (
+                names, last_name, last_name2, id_state, id_municipality, id_locality, CP, street, external_number, internal_number, neighborhood, insurance_number, birth_date, CURP, RFC, phone, email, gender, weight, height, blood_type, marital_status, ethnic_group, religion, status
+            ) VALUES (
+                :names, :last_name, :last_name2, :id_state, :id_municipality, :id_locality, :CP, :street, :external_number, :internal_number, :neighborhood, :insurance_number, :birth_date, :CURP, :RFC, :phone, :email, :gender, :weight, :height, :blood_type, :marital_status, :ethnic_group, :religion, :status
+            )");
+
             $stmt->execute([
                 ':names' => $names,
                 ':last_name' => $last_name,
@@ -111,15 +108,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ':status' => $status,
             ]);
 
-            echo "Paciente insertado correctamente.";
+            header('Location: medicLife/views/dashboard/dashboard.view.php?success=' . urlencode("paciente creado"));
         } catch (Exception $e) {
-            echo "Error: " . $e->getMessage();
-        } catch (PDOException $e) {
-            echo "Error en la base de datos: " . $e->getMessage();
+            header("Location: /views/patient/register/register-patient.view.php?error=" . urlencode($e->getMessage()));
         }
-
-        header('Location: ../../views/dashboard/dashboard.view.php?success=' . urlencode("doctor creado"));
-    } catch (PDOException $e) {
-        echo "Error al insertar: " . $e->getMessage();
-    }
+    } catch (\Throwable $th) {
+        header("Location: /views/patient/register/register-patient.view.php?error=" . urlencode($th->getMessage()));
+    }    
 }

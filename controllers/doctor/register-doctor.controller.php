@@ -1,6 +1,6 @@
 <?php
 
-require '../../config/database.config.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/config/database.config.php';
 
 function validarCampo($valor, $longitudMax, $campoNombre) {
   if (empty($valor)) {

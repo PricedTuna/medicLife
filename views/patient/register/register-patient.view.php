@@ -1,5 +1,5 @@
 <?php
-require '../../../config/database.config.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/medicLife/config/database.config.php';
 
 try {
     $stmt = $pdo->query("SELECT id_state, id, name FROM municipalities");
@@ -27,32 +27,41 @@ try {
     <link rel="stylesheet" href="./register-patient.styles.css">
     <link rel="stylesheet" href="../../components/sidebar.styles.css">
     <script src="../../components/sidebar.app.js" defer></script>
-    <script src="register-patient.app.js" defer></script>
-
+    <script src="./register-patient.app.js" defer></script>
     <title>Registro de Paciente</title>
 </head>
 
 <body>
 
-    <div class="center-container">
-        <?php include '../../components/sidebar.php'; ?> <!-- Incluye el sidebar -->
+    <div class="registerPatientWrapper" >
+    <?php
+$sidebarPath = $_SERVER['DOCUMENT_ROOT'] . '/medicLife/views/components/sidebar.php';
+
+if (file_exists($sidebarPath)) {
+    include $sidebarPath;
+} else {
+    echo "<p style='color: red;'>Error: No se encontró el archivo sidebar.php en '$sidebarPath'</p>";
+}
+?>
+
+
         <div class="form-container">
             <h2>Registro de Paciente</h2>
 
-            <?php if (isset($_GET['error'])): ?>
-                <div style="color: red; margin-bottom: 1rem; border: 1px solid red; padding: 0.5rem; border-radius: 5px;">
-                    <?php echo htmlspecialchars($_GET['error']); ?>
-                </div>
-            <?php endif; ?>
+            <?php if (isset($_GET['success'])): ?>
+                    <div style="color: darkgreen; margin-bottom: 1rem; border: 1px solid green; padding: 0.5rem; border-radius: 5px; background-color: lightgreen;">
+                        <?php echo htmlspecialchars($_GET['success']); ?>
+                    </div>
+                <?php endif; ?>
             
             <div class="steps">
-                <div class="step step-active">Paso 1</div>
-                <div class="step">Paso 2</div>
-                <div class="step">Paso 3</div>
-                <div class="step">Paso 4</div>
+                <div class="step step-active" data-step="1">Paso 1</div>
+                <div class="step" data-step="2">Paso 2</div>
+                <div class="step" data-step="3">Paso 3</div>
+                <div class="step" data-step="4">Paso 4</div>
             </div>
 
-            <form id="patient-form" action="../../../controllers/patient/register-patient.controller.php" method="POST">
+            <form id="patient-form" action="/medicLife/controllers/patient/register-patient.controller.php" method="POST">
                 <!-- Paso 1: Datos Personales -->
                 <div class="form-step" id="step-1">
                     <div class="form-group">

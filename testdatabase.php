@@ -1,5 +1,5 @@
 <?php
-require 'config/database.config.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/config/database.config.php';
 
 try {
     $stmt = $pdo->query("SHOW TABLES");

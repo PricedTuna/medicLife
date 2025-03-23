@@ -5,23 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard </title>
-    <link rel="stylesheet" href="./dashboard.styles.css">
-    <script src="./dashboard.app.js" defer></script>
     <link rel="stylesheet" href="../components/sidebar.styles.css">
     <script src="../components/sidebar.app.js" defer></script>
+    <link rel="stylesheet" href="./dashboard.styles.css">
+    <script src="./dashboard.app.js" async></script>
 
 </head>
 
 <body>
 
-<?php include '../components/sidebar.php'; ?>
+<?php include __DIR__ . '/../components/sidebar.php'; ?>
+
     <main>
         <div class="main-content">
             <header>
                 <h1>Dashboard</h1>
                 <?php if (isset($_GET['success'])): ?>
-                    <div style="color: green; margin-bottom: 1rem; border: 1px solid red; padding: 0.5rem; border-radius: 5px;">
-                        <?php echo htmlspecialchars($_GET['error']); ?>
+                    <div style="color: darkgreen; margin-bottom: 1rem; border: 1px solid green; padding: 0.5rem; border-radius: 5px; background-color: lightgreen;">
+                        <?php echo htmlspecialchars($_GET['success']); ?>
                     </div>
                 <?php endif; ?>
                 <div class="search-container">
@@ -48,6 +49,7 @@
             </section>
             <section class="patient-data">
                 <h3>Calendario</h3>
+                <div id="calendar" class="calendar"></div>
             </section>
         </div>
         <div class="doctor-info">

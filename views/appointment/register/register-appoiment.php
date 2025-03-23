@@ -14,7 +14,7 @@
             <form id="solicitarCita">
                 <div class="form-group">
                     <label for="curp">CURP</label>
-                    <input type="text" name="curp" required>
+                    <input type="text" name="CURP" required>
                 </div>
                 
                 <div class="form-group">

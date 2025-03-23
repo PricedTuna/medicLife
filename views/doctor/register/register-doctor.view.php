@@ -1,5 +1,5 @@
 <?php
-require '../../../config/database.config.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/medicLife/config/database.config.php';
 
 try {
     $stmt = $pdo->query("SELECT id_state, id, name FROM municipalities");
